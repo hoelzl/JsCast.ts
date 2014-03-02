@@ -1,7 +1,6 @@
 {
     "name": "jscast",
     "version": "0.0.0",
-
     "ignore": [
         "**/.*",
         "node_modules",
@@ -10,12 +9,13 @@
         "test",
         "tests"
     ],
-
     "dependencies": {
         "jquery": "2.1.0",
         "angular": "1.2.14",
         "angular-route": "1.2.14",
         "angular-mocks": "1.2.14",
-        "requirejs": "2.1.11"
+        "requirejs": "2.1.11",
+        "angular-bootstrap": "~0.10.0",
+        "bootstrap": "~3.0.3"
     }
 }

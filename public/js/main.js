@@ -8,12 +8,15 @@ requirejs.config({
 
         'angular': 'components/angular/angular',
         'angularRoute': 'components/angular-route/angular-route',
+        'ui.bootstrap': 'components/angular-bootstrap/ui-bootstrap',
 
+        'navbarController': 'js/controllers/navbarController',
         'pageController': 'js/controllers/pageController',
 
         'app': 'js/app',
         'config': 'js/config',
-        'routes': 'js/routes'
+        'routes': 'js/routes',
+        'controllers': 'js/controllers'
     },
 
     shim: {
@@ -27,6 +30,9 @@ requirejs.config({
         },
         'angularRoute': {
             deps: [ 'angular' ]
+        },
+        'ui.bootstrap': {
+            deps: [ 'jquery', 'angular' ]
         }
     }
 });
@@ -36,7 +42,8 @@ require([
 
     'angular',
     'config',
-    'routes'
+    'routes',
+    'controllers'
 
 ], function(angular) {
 
