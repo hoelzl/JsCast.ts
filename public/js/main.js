@@ -50,4 +50,5 @@ require([
     'use strict';
 
     angular.bootstrap(document, ['jscast']);
+    $('body').removeClass('hidden');
 });
