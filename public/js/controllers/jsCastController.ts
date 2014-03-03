@@ -1,10 +1,23 @@
 /**
  * Created by tc on 3/Mar/2014.
  */
-define(['app', 'config'], function (app) {
-    return app.controller('JsCastController', ['$scope', 'config', function ($scope, config) {
 
-        'use strict';
+/// <reference path="../../components/DefinitelyTyped/requirejs/require" />
+/// <reference path="../../components/DefinitelyTyped/underscore/underscore" />
+
+interface ISlide {
+    id: number;
+    thumbnail: any;
+    title: string;
+    contents: {text: string};
+}
+
+define(['app', 'config'], function (app) {
+    function getMainCanvas() :HTMLCanvasElement {
+        return <HTMLCanvasElement> document.getElementById('main-canvas');
+    }
+
+    return app.controller('JsCastController', ['$scope', 'config', function ($scope, config) {
 
         $scope.appName = config.appName;
 
@@ -34,8 +47,8 @@ define(['app', 'config'], function (app) {
             $scope.setCurrentSlideId(slideId);
         };
 
-        $scope.findSlide = function (id) {
-            return _.find($scope.slides, function (slide) {
+        $scope.findSlide = function (id: number) {
+            return _.find($scope.slides, function (slide: ISlide) {
                 return slide.id === id;
             });
         };
@@ -89,7 +102,7 @@ define(['app', 'config'], function (app) {
             var slide = $scope.findSlide($scope.currentSlideId);
             var text = slide.contents.text;
             if (text) {
-                var canvas = document.getElementById('main-canvas');
+                var canvas = getMainCanvas();
                 // Clear the canvas
                 canvas.width = canvas.width;
                 var context = canvas.getContext('2d');

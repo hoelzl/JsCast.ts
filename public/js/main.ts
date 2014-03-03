@@ -1,3 +1,6 @@
+/// <reference path="../components/DefinitelyTyped/jquery/jquery" />
+/// <reference path="../components/DefinitelyTyped/requirejs/require" />
+
 requirejs.config({
 
     baseUrl: '/',
@@ -23,7 +26,6 @@ requirejs.config({
     },
 
     shim: {
-
         'jquery': {
             exports: 'jQuery'
         },
@@ -41,7 +43,6 @@ requirejs.config({
 });
 
 require([
-
     'angular',
     'controllers',
     'config',
@@ -49,11 +50,9 @@ require([
 
 ], function (angular) {
 
-    'use strict';
-
     function resizeCanvas() {
 
-        var mainCanvas = $('#main-canvas')[0];
+        var mainCanvas = <HTMLCanvasElement> $('#main-canvas')[0];
         var viewport = document.defaultView;
         var slidesWidth = $('#slide-list').width();
         var inspectorWidth = $('#inspector').width();

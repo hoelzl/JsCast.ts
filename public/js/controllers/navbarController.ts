@@ -2,6 +2,8 @@
  * Created by tc on 2/Mar/2014.
  */
 
+/// <reference path="../../components/DefinitelyTyped/requirejs/require" />
+
 define(['app', 'config'], function (app) {
 
     'use strict';
