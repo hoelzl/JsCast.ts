@@ -47,7 +47,7 @@ require([
     'config',
     'routes'
 
-], function (angular, controllers) {
+], function (angular) {
 
     'use strict';
 
@@ -59,8 +59,7 @@ require([
         var inspectorWidth = $('#inspector').width();
         var offsetTop = mainCanvas.offsetTop;
         var additionalOffset = 10;
-        var canvasHeight = viewport.innerHeight - offsetTop - additionalOffset;
-        mainCanvas.height = canvasHeight;
+        mainCanvas.height = viewport.innerHeight - offsetTop - additionalOffset;
         // Remove 4 times the offset to compensate for margins of slide list and inspector.
         mainCanvas.width = viewport.innerWidth - slidesWidth - inspectorWidth - 4 * additionalOffset;
     }

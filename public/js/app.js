@@ -2,5 +2,6 @@ define(['angular', 'angularRoute', 'ui.bootstrap', 'underscore'], function (angu
 
     'use strict';
 
+    //noinspection JSCheckFunctionSignatures
     return angular.module('jscast', ['ngRoute', 'ui.bootstrap']);
 });
