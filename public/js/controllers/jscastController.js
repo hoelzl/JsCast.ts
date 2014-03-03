@@ -2,23 +2,25 @@
  * Created by tc on 3/Mar/2014.
  */
 define(['app', 'config'], function (app) {
-
-    'use strict';
-
     return app.controller('JsCastController', ['$scope', 'config', function ($scope, config) {
+
+        'use strict';
+
         $scope.appName = config.appName;
 
         $scope.slides = [
-            {id: 1, thumbnail: '[thumbnail 1]', title: 'Slide 1'},
-            {id: 2, thumbnail: '[thumbnail 2]', title: 'Slide 2'}
+            { id: 1, thumbnail: '[thumbnail 1]',
+                title: 'Slide 1', contents: { text: 'Some text' }},
+            {id: 2, thumbnail: '[thumbnail 2]',
+                title: 'Slide 2', contents: { text: 'Another text' }}
         ];
 
         $scope.slideCounter = 3;
         $scope.currentSlideId = 1;
 
         $scope.setCurrentSlideId = function (id) {
-            console.log('Setting slide id:', id);
             $scope.currentSlideId = id;
+            $scope.drawContents();
         };
 
         $scope.newSlide = function () {
@@ -26,9 +28,10 @@ define(['app', 'config'], function (app) {
             $scope.slides.push({
                 id: slideId,
                 thumbnail: '[thumbnail ' + slideId + ']',
-                title: 'Slide ' + slideId
+                title: 'Slide ' + slideId,
+                contents: { text: (Math.random() * 0xffffffffff).toString(36) }
             });
-            $scope.currentSlideId = slideId;
+            $scope.setCurrentSlideId(slideId);
         };
 
         $scope.findSlide = function (id) {
@@ -36,6 +39,11 @@ define(['app', 'config'], function (app) {
                 return slide.id === id;
             });
         };
+
+        $scope.currentSlide = function () {
+            return $scope.findSlide($scope.currentSlideId);
+        };
+
 
         // TODO: rewrite to search the array only once
         $scope.findSlideIndex = function (id) {
@@ -46,7 +54,7 @@ define(['app', 'config'], function (app) {
             var slides = $scope.slides;
             if (originalSlide) {
                 slides.splice(_.indexOf(slides, originalSlide) + 1, 0, newSlide);
-                $scope.currentSlideId = newSlide.id;
+                $scope.setCurrentSlideId(newSlide.id);
             } else {
                 throw Error('Cannot find slide to duplicate?');
             }
@@ -58,20 +66,35 @@ define(['app', 'config'], function (app) {
             var newSlide = {
                 id: newSlideId,
                 thumbnail: originalSlide.thumbnail,
-                title: 'Slide ' + newSlideId + ' (-> ' + originalSlide.title + ')'
-            }
+                title: 'Slide ' + newSlideId + ' (-> ' + originalSlide.title + ')',
+                // TODO: Should clone contents.
+                contents: originalSlide.contents
+            };
             $scope.insertAfterSlide(originalSlide, newSlide);
         };
 
         $scope.deleteSlide = function () {
-            console.log('Delete slide');
             var slideIndex = $scope.findSlideIndex($scope.currentSlideId);
             var slides = $scope.slides;
             slides.splice(slideIndex, 1);
             if (slideIndex >= slides.length) {
-                $scope.currentSlideId = slides[slideIndex - 1].id;
+                $scope.setCurrentSlideId(slides[slideIndex - 1].id);
             } else {
-                $scope.currentSlideId = slides[slideIndex].id;
+                $scope.setCurrentSlideId(slides[slideIndex].id);
+            }
+        }
+
+        $scope.drawContents = function () {
+            console.log('drawContents()');
+            var slide = $scope.findSlide($scope.currentSlideId);
+            var text = slide.contents.text;
+            if (text) {
+                var canvas = document.getElementById('main-canvas');
+                // Clear the canvas
+                canvas.width = canvas.width;
+                var context = canvas.getContext('2d');
+                context.font = 'italic 40pt Calibri';
+                context.fillText(slide.contents.text, 150, 100);
             }
         }
     }]);

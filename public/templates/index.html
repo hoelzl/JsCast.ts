@@ -37,11 +37,13 @@
     </ul>
 </div>
 <div style="float:left; margin: 5px 0px">
-    <canvas id="main-canvas" style="background-color: yellow"></canvas>
+    <canvas id="main-canvas"
+            style="background-color: lightgray"></canvas>
 </div>
 <div id="inspector" style="width: 200px; float: left; margin: 5px 5px 5px 10px">
     <b>Inspector</b><br>
-    Data for slide {{currentSlideId}}!
+    Data for slide {{currentSlideId}}!<br>
+    Contents: {{currentSlide().contents}}
 </div>
 
 <script data-main="js/main" src="components/requirejs/require.js"></script>

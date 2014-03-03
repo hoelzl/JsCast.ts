@@ -52,7 +52,6 @@ require([
     'use strict';
 
     function resizeCanvas() {
-        console.log('resizing canvas');
 
         var mainCanvas = $('#main-canvas')[0];
         var viewport = document.defaultView;
@@ -62,7 +61,7 @@ require([
         var additionalOffset = 10;
         var canvasHeight = viewport.innerHeight - offsetTop - additionalOffset;
         mainCanvas.height = canvasHeight;
-        // Remove 3.5 times the offset to compensate for margins of slide list and inspector.
+        // Remove 4 times the offset to compensate for margins of slide list and inspector.
         mainCanvas.width = viewport.innerWidth - slidesWidth - inspectorWidth - 4 * additionalOffset;
     }
 
