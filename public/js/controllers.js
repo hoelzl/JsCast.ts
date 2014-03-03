@@ -3,8 +3,13 @@
  */
 
 // Load all controllers used in the main page.
-define(['app', 'navbarController'], function (app) {
+define(['app', 'jsCastController', 'navbarController', 'slidesController'],
+    function (app, jsCastController) {
 
-    'use strict';
+        'use strict';
+        return {
+            app: app,
+            jsCastController: jsCastController
+        };
 
-});
+    });

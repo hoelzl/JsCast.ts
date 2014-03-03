@@ -1,4 +1,4 @@
-define(['angular', 'angularRoute', 'ui.bootstrap'], function (angular) {
+define(['angular', 'angularRoute', 'ui.bootstrap', 'underscore'], function (angular) {
 
     'use strict';
 
