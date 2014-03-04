@@ -1,11 +1,17 @@
-/// <reference path="../components/DefinitelyTyped/jquery/jquery" />
-/// <reference path="../components/DefinitelyTyped/requirejs/require" />
+/// <reference path="references"/>
+/// <amd-dependency path="app"/>
+/// <amd-dependency path="config"/>
+/// <amd-dependency path="controllers"/>
 
 requirejs.config({
 
     baseUrl: '/',
 
     paths: {
+
+        'domReady': 'components/requirejs-domready/domReady',
+
+        'amd': 'js/amd',
 
         'jquery': 'components/jquery/dist/jquery',
         'underscore': 'components/underscore/underscore',
@@ -42,28 +48,24 @@ requirejs.config({
     }
 });
 
-require([
-    'angular',
-    'controllers',
-    'config',
-    'routes'
+import angular = require('./amd/angular');
+import domReady = require('./amd/domReady');
 
-], function (angular) {
+export function resizeCanvas() {
 
-    function resizeCanvas() {
+    var mainCanvas = <HTMLCanvasElement> $('#main-canvas')[0];
+    var viewport = document.defaultView;
+    var slidesWidth = $('#slide-list').width();
+    var inspectorWidth = $('#inspector').width();
+    var offsetTop = mainCanvas.offsetTop;
+    var additionalOffset = 10;
+    mainCanvas.height = viewport.innerHeight - offsetTop - additionalOffset;
+    // Remove 4 times the offset to compensate for margins of slide list and inspector.
+    mainCanvas.width = viewport.innerWidth - slidesWidth - inspectorWidth - 4 * additionalOffset;
+}
 
-        var mainCanvas = <HTMLCanvasElement> $('#main-canvas')[0];
-        var viewport = document.defaultView;
-        var slidesWidth = $('#slide-list').width();
-        var inspectorWidth = $('#inspector').width();
-        var offsetTop = mainCanvas.offsetTop;
-        var additionalOffset = 10;
-        mainCanvas.height = viewport.innerHeight - offsetTop - additionalOffset;
-        // Remove 4 times the offset to compensate for margins of slide list and inspector.
-        mainCanvas.width = viewport.innerWidth - slidesWidth - inspectorWidth - 4 * additionalOffset;
-    }
-
-    angular.bootstrap(document, ['jscast']);
+domReady(function () {
+    angular.bootstrap(document, ['app']);
     document.defaultView.addEventListener('resize', resizeCanvas);
 
     $('body').removeClass('hidden');

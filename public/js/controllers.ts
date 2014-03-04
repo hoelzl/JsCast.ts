@@ -2,13 +2,15 @@
  * Created by tc on 3/Mar/2014.
  */
 
-/// <reference path="../components/DefinitelyTyped/requirejs/require" />
+/// <reference path="references"/>
+import app = require('app');
+import jsCast = require('./controllers/jsCastController');
+import navbar = require('./controllers/navbarController');
+import page = require('./controllers/pageController');
+import slides = require('./controllers/slidesController');
 
-// Load all controllers used in the main page.
-define(['app', 'jsCastController', 'navbarController', 'slidesController'],
-    function (app, jsCastController) {
-        return {
-            app: app,
-            jsCastController: jsCastController
-        };
-    });
+export var jscast = app;
+export var jsCastController = jsCast;
+export var navbarController = navbar;
+export var pageController = page;
+export var slidesController = slides;

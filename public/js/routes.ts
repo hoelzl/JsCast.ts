@@ -1,13 +1,14 @@
+/// <reference path="references" />
+/// <amd-dependency path="controllers/pageController"/>
 
-/// <reference path="../components/DefinitelyTyped/requirejs/require" />
+import app = require('app');
 
-define(['app', 'pageController'], function (app) {
+var routes = app.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.
+        when('/', {
+            templateUrl: './templates/page.html',
+            controller: 'PageController'
+        });
+}]);
 
-    app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.
-            when('/', {
-                templateUrl: './templates/page.html',
-                controller: 'PageController'
-            });
-    }]);
-});
+export = routes;

@@ -4,7 +4,7 @@ define(function () {
 
     describe('PageController', function() {
 
-        beforeEach(module('jscast'));
+        beforeEach(module('app'));
 
         it('foo returns proper value', inject(function($rootScope, $controller) {
 

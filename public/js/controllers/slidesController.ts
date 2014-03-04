@@ -4,10 +4,11 @@
 
 /// <reference path="../../components/DefinitelyTyped/requirejs/require" />
 
-define(['app', 'config'], function (app) {
+import app = require('../app');
+import config = require('../config');
 
-    return app.controller('SlidesController', ['$scope', 'config', function ($scope, config) {
-        $scope.appName = config.appName;
-    }]);
+var controller = app.controller('SlidesController', ['$scope', 'config', function ($scope, config) {
+    $scope.appName = config.appName;
+}]);
 
-});
+export = controller;

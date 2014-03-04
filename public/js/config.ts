@@ -1,7 +1,7 @@
-/// <reference path="../components/DefinitelyTyped/requirejs/require" />
+/// <reference path="references"/>
 
-define(['app'], function (app) {
-    app.constant('config', {
-        appName: 'JsCast'
-    });
+import app = require('app');
+
+app.constant('config', {
+    appName: 'JsCast'
 });
