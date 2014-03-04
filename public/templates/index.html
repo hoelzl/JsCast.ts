@@ -29,8 +29,8 @@
     <ul class="list-group">
         <li class="list-group-item text-center"
             data-ng-repeat="slide in slides"
-            data-ng-click="setCurrentSlideId(slide.id)"
-            data-ng-class="currentSlideId == slide.id && 'text-primary'">
+            data-ng-click="currentSlide = slide"
+            data-ng-class="currentSlide.id == slide.id && 'text-primary'">
             {{slide.thumbnail}}<br>
             {{slide.title}}
         </li>
@@ -42,8 +42,8 @@
 </div>
 <div id="inspector" style="width: 200px; float: left; margin: 5px 5px 5px 10px">
     <b>Inspector</b><br>
-    Data for slide {{currentSlideId}}!<br>
-    Contents: {{currentSlide().contents}}
+    Data for slide {{currentSlide.id}}:<br>
+    Contents: {{currentSlide.contents}}
 </div>
 
 <script data-main="js/main" src="components/requirejs/require.js"></script>

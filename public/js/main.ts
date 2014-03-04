@@ -48,6 +48,9 @@ requirejs.config({
     }
 });
 
+// Cannot yet use the configured paths, since this code lives inside the same
+// module as the config object.
+
 import angular = require('./amd/angular');
 import domReady = require('./amd/domReady');
 
@@ -60,8 +63,10 @@ export function resizeCanvas() {
     var offsetTop = mainCanvas.offsetTop;
     var additionalOffset = 10;
     mainCanvas.height = viewport.innerHeight - offsetTop - additionalOffset;
-    // Remove 4 times the offset to compensate for margins of slide list and inspector.
-    mainCanvas.width = viewport.innerWidth - slidesWidth - inspectorWidth - 4 * additionalOffset;
+    // Remove 4 times the offset to compensate for margins of slide list and
+    // inspector.
+    mainCanvas.width = viewport.innerWidth - slidesWidth
+        - inspectorWidth - 4 * additionalOffset;
 }
 
 domReady(function () {

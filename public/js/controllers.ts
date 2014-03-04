@@ -3,14 +3,14 @@
  */
 
 /// <reference path="references"/>
-import app = require('app');
-import jsCast = require('./controllers/jsCastController');
-import navbar = require('./controllers/navbarController');
-import page = require('./controllers/pageController');
-import slides = require('./controllers/slidesController');
+import appModule = require('app');
+import jsCast = require('./controllers/JsCastController');
+import navbar = require('./controllers/NavbarController');
+import page = require('./controllers/PageController');
+import slides = require('./controllers/SlidesController');
 
-export var jscast = app;
-export var jsCastController = jsCast;
-export var navbarController = navbar;
-export var pageController = page;
-export var slidesController = slides;
+export var app = appModule;
+export var JsCastController = jsCast;
+export var NavbarController = navbar;
+export var PageController = page;
+export var SlidesController = slides;
