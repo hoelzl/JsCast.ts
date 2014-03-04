@@ -6,7 +6,7 @@
 import appModule = require('app');
 import jsCast = require('./controllers/JsCastController');
 import navbar = require('./controllers/NavbarController');
-import page = require('./controllers/PageController');
+import page = require('./controllers/InspectorController');
 import slides = require('./controllers/SlidesController');
 
 export var app = appModule;

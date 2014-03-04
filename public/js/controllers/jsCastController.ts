@@ -21,10 +21,27 @@ function getMainCanvas():HTMLCanvasElement {
 }
 
 var controller = app.controller('JsCastController', ['$scope', 'config',
-    function ($scope, config) {
+    ($scope, config) => {
         var currentSlideCounter = 3;
 
         $scope.appName = config.appName;
+
+        $scope.inspector = {
+            visible: true
+        };
+
+        $scope.slideList = {
+            visible: true
+        };
+
+        $scope.toggle = (thing) => {
+            thing.visible = !thing.visible;
+            // TODO: Remove this hack!
+            setTimeout(() => {
+                require('main').resizeCanvas();
+                $scope.drawContents();
+            });
+        };
 
         $scope.slides = [
             { id: 1, thumbnail: '[thumbnail 1]',
@@ -33,7 +50,7 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
                 title: 'Slide 2', contents: { text: 'Another text' }}
         ];
 
-        $scope._currentSlide = [$scope.slides[0]];
+        $scope._currentSlide = [null];
 
         Object.defineProperty($scope, 'currentSlide', {
             get: () => $scope._currentSlide[0],
@@ -43,11 +60,11 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
             }
         });
 
-        $scope.setCurrentSlide = function (slide) {
+        $scope.setCurrentSlide = (slide) => {
             $scope.currentSlide = slide;
         };
 
-        $scope.newSlide = function () {
+        $scope.newSlide = () => {
             var slideId = currentSlideCounter++;
             var newSlide = {
                 id: slideId,
@@ -59,11 +76,11 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
             $scope.currentSlide = newSlide;
         };
 
-        $scope.findSlideIndex = function (slide: ISlide) {
+        $scope.findSlideIndex = (slide: ISlide) => {
             return _.indexOf($scope.slides, slide);
         };
 
-        $scope.insertAfterSlide = function (originalSlide, newSlide) {
+        $scope.insertAfterSlide = (originalSlide, newSlide) => {
             var slides = $scope.slides;
             if (newSlide) {
                 if (originalSlide) {
@@ -77,7 +94,7 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
             }
         };
 
-        $scope.duplicateSlide = function () {
+        $scope.duplicateSlide = () => {
             var originalSlide = $scope.currentSlide;
             var newSlideId = currentSlideCounter++;
             var newSlide;
@@ -99,7 +116,7 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
             $scope.insertAfterSlide(originalSlide, newSlide);
         };
 
-        $scope.deleteSlide = function () {
+        $scope.deleteSlide = () => {
             var slideIndex = $scope.findSlideIndex($scope.currentSlide);
             var slides = $scope.slides;
             slides.splice(slideIndex, 1);
@@ -114,7 +131,8 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
             }
         };
 
-        $scope.drawContents = function () {
+        $scope.drawContents = () => {
+            // console.log('drawing contents');
             var slide = $scope.currentSlide;
             var canvas = getMainCanvas();
             // Clear the canvas
@@ -128,7 +146,8 @@ var controller = app.controller('JsCastController', ['$scope', 'config',
                     context.fillText(slide.contents.text, 150, 100);
                 }
             }
-        }
+        };
+
     }]);
 
 export = controller;

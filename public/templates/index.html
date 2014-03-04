@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet"
+          href="../components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body class="hidden" ng-controller="JsCastController">
 <div ng-controller="NavbarController"
@@ -19,12 +20,16 @@
             <li><a data-ng-click="newSlide()">New Slide</a></li>
             <li><a data-ng-click="duplicateSlide()">Duplicate Slide</a></li>
             <li><a data-ng-click="deleteSlide()">Delete Slide</a></li>
+            <li><a data-ng-click="toggle(slideList)">Toggle SlideList</a></li>
+            <li><a data-ng-click="toggle(inspector)">Toggle Inspector</a></li>
         </ul>
         <!--/.nav-collapse -->
     </div>
 </div>
 
-<div id="slide-list" style="width: 200px; float: left; margin: 5px"
+<div id="slide-list" class="container"
+     ng-if="slideList.visible"
+     style="width: 200px; float: left; margin: 5px"
      ng-controller="SlidesController">
     <ul class="list-group">
         <li class="list-group-item text-center"
@@ -32,7 +37,7 @@
             data-ng-click="currentSlide = slide"
             data-ng-class="currentSlide.id == slide.id && 'text-primary'">
             {{slide.thumbnail}}<br>
-            {{slide.title}}
+            <span>{{slide.title}}</span>
         </li>
     </ul>
 </div>
@@ -40,10 +45,27 @@
     <canvas id="main-canvas"
             style="background-color: lightgray"></canvas>
 </div>
-<div id="inspector" style="width: 200px; float: left; margin: 5px 5px 5px 10px">
-    <b>Inspector</b><br>
-    Data for slide {{currentSlide.id}}:<br>
-    Contents: {{currentSlide.contents}}
+<div id="inspector"
+     ng-if="inspector.visible"
+     class="container"
+     style="width: 280px; float: left; margin: 5px 5px 5px 10px"
+     ng-controller="InspectorController">
+    <div class="row">
+        <b class="col-md-12">Inspector {{inspectorCollapsed}}</b><br><br>
+    </div>
+    <div class="row">
+        <span class="col-md-4">Slide Id:</span>
+        <input class="col-md-8" type="number" ng-model="currentSlide.id">
+    </div>
+    <div class="row">
+        <span class="col-md-4">Title:</span>
+        <input class="col-md-8" type="text" ng-model="currentSlide.title"><br>
+    </div>
+    <div class="row">
+        <span class="col-md-4">Text:</span>
+        <input class="col-md-8" type="text"
+               ng-model="currentSlide.contents.text">
+    </div>
 </div>
 
 <script data-main="js/main" src="components/requirejs/require.js"></script>

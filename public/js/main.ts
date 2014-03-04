@@ -54,19 +54,43 @@ requirejs.config({
 import angular = require('./amd/angular');
 import domReady = require('./amd/domReady');
 
-export function resizeCanvas() {
+export function computeMaxDimensions (canvas) {
+    var slideList = $('#slide-list');
 
-    var mainCanvas = <HTMLCanvasElement> $('#main-canvas')[0];
-    var viewport = document.defaultView;
-    var slidesWidth = $('#slide-list').width();
-    var inspectorWidth = $('#inspector').width();
-    var offsetTop = mainCanvas.offsetTop;
-    var additionalOffset = 10;
-    mainCanvas.height = viewport.innerHeight - offsetTop - additionalOffset;
-    // Remove 4 times the offset to compensate for margins of slide list and
-    // inspector.
-    mainCanvas.width = viewport.innerWidth - slidesWidth
-        - inspectorWidth - 4 * additionalOffset;
+    if (slideList.length > 0) {
+        var offsetLeft = slideList.offset().left + slideList.outerWidth(true);
+        var offsetTop = slideList.offset().top;
+    } else {
+        offsetLeft = 0;
+        offsetTop = canvas.offset().top;
+    }
+
+    var inspector = $('#inspector');
+    var inspectorWidth = inspector.outerWidth(true) || 0;
+
+    var additionalOffset = canvas.outerWidth(true) - canvas.outerWidth();
+    var viewport = $(document.defaultView);
+
+    // console.log(viewport.width(), offsetLeft, inspectorWidth, additionalOffset);
+
+    return {
+        height: viewport.height() - offsetTop - 10,
+        width: viewport.width() - offsetLeft - inspectorWidth - additionalOffset
+    }
+}
+
+export function resizeCanvas() {
+    var mainCanvas = $('#main-canvas');
+    var dimensions = computeMaxDimensions(mainCanvas);
+
+    // Note: set the height and width of the underlying canvas element.  Using
+    // the jQuery height and with leads to a CSS transform of the canvas in its
+    // original size.  Maybe combine these two things to achieve scaling to
+    // the screen proportions.
+    // console.log('canvas dimensions', dimensions.height, dimensions.width);
+    var canvasDom = mainCanvas.get(0);
+    canvasDom.height = dimensions.height;
+    canvasDom.width = dimensions.width;
 }
 
 domReady(function () {
@@ -76,4 +100,5 @@ domReady(function () {
     $('body').removeClass('hidden');
 
     resizeCanvas();
+    setTimeout(resizeCanvas);
 });

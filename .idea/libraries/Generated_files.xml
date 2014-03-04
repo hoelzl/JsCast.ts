@@ -4,7 +4,6 @@
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/public/js/routes.js" />
         <item url="file://$PROJECT_DIR$/public/js/references.js" />
-        <item url="file://$PROJECT_DIR$/public/js/main.js" />
         <item url="file://$PROJECT_DIR$/public/js/amd/angular.js" />
         <item url="file://$PROJECT_DIR$/public/js/controllers/navbarController.js" />
         <item url="file://$PROJECT_DIR$/public/js/main.js" />
@@ -13,6 +12,7 @@
         <item url="file://$PROJECT_DIR$/public/js/controllers/slidesController.js" />
         <item url="file://$PROJECT_DIR$/public/js/controllers/pageController.js" />
         <item url="file://$PROJECT_DIR$/public/js/controllers.js" />
+        <item url="file://$PROJECT_DIR$/public/js/controllers/InspectorController.js" />
         <item url="file://$PROJECT_DIR$/public/js/config.js" />
       </sourceFilesUrls>
     </properties>
@@ -416,10 +416,10 @@
       <root url="file://$PROJECT_DIR$/public/js/app2.js" />
       <root url="file://$PROJECT_DIR$/public/js/app2.js" />
       <root url="file://$PROJECT_DIR$/public/js/routes.js" />
-      <root url="file://$PROJECT_DIR$/public/js/main.js" />
       <root url="file://$PROJECT_DIR$/public/js/controllers/navbarController.js" />
       <root url="file://$PROJECT_DIR$/public/js/controllers/jsCastController.js" />
       <root url="file://$PROJECT_DIR$/public/js/app.js" />
+      <root url="file://$PROJECT_DIR$/public/js/controllers/InspectorController.js" />
       <root url="file://$PROJECT_DIR$/public/js/controllers.js" />
       <root url="file://$PROJECT_DIR$/public/js/config.js" />
       <root url="file://$PROJECT_DIR$/public/js/references.js" />
